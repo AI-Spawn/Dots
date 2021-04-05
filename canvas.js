@@ -1,5 +1,6 @@
-let num_nodes = 20;
-let node_speed = .05;
+let num_nodes = 50;
+let node_speed = .025;
+let line_range = 500;
 
 let node_rad = 5;
 
@@ -21,7 +22,7 @@ function setup() {
     let x = random(0, canvas.width);
     let y = random(0, canvas.height);
 
-    let vel = bind_vector(
+    let vel = bindVector(
       random(-node_speed, node_speed),
       random(-node_speed, node_speed),
       node_speed,
@@ -37,8 +38,14 @@ function draw() {
   nodes.forEach((n, index) => {
     n.display();
     n.move(canvas);
-    for (let i = index; i < nodes.length; i++) {
-      line(n.x, n.y, nodes[i].x, nodes[i].y);
+    for (let i = index + 1; i < nodes.length; i++) {
+      let connection = (nodes[i].x, nodes[i].y);
+      let d = dist(n.x, n.y, nodes[i].x, nodes[i].y);
+      if (d < line_range) {
+        let thickness = 1000 / (d ** 2);
+        strokeWeight(keepRange(thickness, 0, 5));
+        line(n.x, n.y, nodes[i].x, nodes[i].y);
+      }
     }
   });
 }

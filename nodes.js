@@ -9,6 +9,7 @@ class node {
     this.move_updated = Date.now();
   }
   display() {
+    strokeWeight(0);
     fill(this.color);
     ellipse(this.x, this.y, this.rad * 2);
   }
