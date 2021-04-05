@@ -1,4 +1,4 @@
-let num_nodes = 100;
+let num_nodes = 20;
 let node_speed = .05;
 
 let node_rad = 5;
@@ -28,12 +28,17 @@ function setup() {
     );
     nodes.push(new node(x, y, vel, node_rad));
   }
+
+  stroke(255);
 }
 function draw() {
   background(0);
   fill(255);
-  nodes.forEach((n) => {
+  nodes.forEach((n, index) => {
     n.display();
     n.move(canvas);
+    for (let i = index; i < nodes.length; i++) {
+      line(n.x, n.y, nodes[i].x, nodes[i].y);
+    }
   });
 }
