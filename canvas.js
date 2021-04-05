@@ -1,6 +1,6 @@
-let num_nodes = 50;
+let num_nodes = 300;
 let node_speed = .025;
-let line_range = 500;
+let line_range = 400;
 
 let node_rad = 5;
 
@@ -36,16 +36,21 @@ function draw() {
   background(0);
   fill(255);
   nodes.forEach((n, index) => {
-    n.display();
     n.move(canvas);
+    n.display();
+    let distances = [];
+
     for (let i = index + 1; i < nodes.length; i++) {
-      let connection = (nodes[i].x, nodes[i].y);
-      let d = dist(n.x, n.y, nodes[i].x, nodes[i].y);
-      if (d < line_range) {
-        let thickness = 1000 / (d ** 2);
-        strokeWeight(keepRange(thickness, 0, 5));
-        line(n.x, n.y, nodes[i].x, nodes[i].y);
-      }
+      distances.push({
+        node: nodes[i],
+        dist: dist(n.x, n.y, nodes[i].x, nodes[i].y),
+      });
+    }
+    distances.sort((a, b) => (a.dist > b.dist) ? 1 : -1);
+
+    for (let i = 0; i < min(3, nodes.length - index - 1); i++) {
+      let c = distances[i];
+      n.connect(c.node.x, c.node.y);
     }
   });
 }
