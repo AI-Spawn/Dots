@@ -1,4 +1,4 @@
-let num_nodes = 300;
+let num_nodes = 20;
 let node_speed = .025;
 let line_range = 400;
 
@@ -48,9 +48,14 @@ function draw() {
     }
     distances.sort((a, b) => (a.dist > b.dist) ? 1 : -1);
 
-    for (let i = 0; i < min(3, nodes.length - index - 1); i++) {
+    for (let i = 0; i < min(5, nodes.length - index - 1); i++) {
       let c = distances[i];
       n.connect(c.node.x, c.node.y);
     }
   });
+}
+
+function mouseClicked() {
+  nodes = [];
+  setup();
 }

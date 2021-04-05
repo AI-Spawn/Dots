@@ -33,10 +33,11 @@ class node {
 
   connect(x, y) {
     let d = dist(this.x, this.y, x, y);
-    if (d < line_range) {
-      let thickness = 1000 / (d ** 2);
-      strokeWeight(keepRange(thickness, 0, 5));
-      line(this.x, this.y, x, y);
-    }
+    // if (d < line_range) {
+    let thickness = 500000 / (d ** 3);
+
+    strokeWeight(keepRange(thickness, 0, 2));
+    line(this.x, this.y, x, y);
+    // }
   }
 }
