@@ -24,7 +24,7 @@ class node {
       this.vel[0] *= -1;
     }
 
-    if (this.y < this.rad || this.y > c.height) {
+    if (this.y < this.rad || this.y > c.height - this.rad) {
       this.y = keepRange(this.y, this.rad, c.height - this.rad);
 
       this.vel[1] *= -1;
