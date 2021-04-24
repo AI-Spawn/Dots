@@ -1,4 +1,4 @@
-let num_nodes = 20;
+let num_nodes = 250;
 let node_speed = .025;
 let line_range = 400;
 
