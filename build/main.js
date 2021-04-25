@@ -35,7 +35,7 @@ class Dot {
             }
         }
         d.sort((a, b) => (a.dist > b.dist ? 1 : -1));
-        for (let i = 0; i < min(5, points.length); i++) {
+        for (let i = 0; i < min(5, d.length); i++) {
             let c = d[i];
             line(this.x, this.y, c.dot.x, c.dot.y);
         }
