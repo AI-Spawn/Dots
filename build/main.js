@@ -308,7 +308,9 @@ class QuadTree {
 }
 let numDots;
 let dots = [];
+let mSize;
 function setup() {
+    mSize = 50;
     var cnv = createCanvas(windowWidth, windowHeight);
     cnv.position(0, 0);
     numDots = height;
@@ -323,6 +325,8 @@ function draw() {
         let point = new Point(p.x, p.y, p);
         qtree.insert(point);
     }
+    fill(255, 255, 255, 100);
+    ellipse(mouseX, mouseY, mSize, mSize);
     for (let p of dots) {
         let range = new Circle(p.x, p.y, 200);
         let points = qtree.query(range);
@@ -330,19 +334,12 @@ function draw() {
         p.show();
         p.move();
     }
-}
-function mousePressed() {
-    let qtree = QuadTree.create();
-    for (let p of dots) {
-        let point = new Point(p.x, p.y, p);
-        qtree.insert(point);
-    }
-    for (const p of dots) {
-        if (dist(p.x, p.y, mouseX, mouseY) < p.r * 2) {
-            let range = new Circle(p.x, p.y, 100);
-            let points = qtree.query(range);
-            console.log(points);
-        }
+    let range = new Circle(mouseX, mouseY, mSize / 2);
+    let points = qtree.query(range);
+    for (let p of points) {
+        let d = p.data;
+        fill(200, 0, 0);
+        ellipse(d.x, d.y, d.r * 2, d.r * 2);
     }
 }
 function bindVector(vel, magnitude = 1) {
@@ -363,5 +360,9 @@ function bindVector(vel, magnitude = 1) {
 }
 function clamp(num, min, max) {
     return num <= min ? min : num >= max ? max : num;
+}
+function mouseWheel(event) {
+    mSize -= event.deltaY;
+    mSize = max(0, min(mSize, 2 * max(width, height)));
 }
 //# sourceMappingURL=../src/src/main.js.map
