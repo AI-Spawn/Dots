@@ -1,8 +1,5 @@
-// Daniel Shiffman
-// http://codingtra.in
-// http://patreon.com/codingtrain
+// This is a typed version of Daniel Shiffman (Coding Train)'s Quad Tree algorithm
 
-// QuadTree
 interface Obj {
   points: Point[];
   ne?: Obj;
@@ -23,8 +20,8 @@ interface Obj {
 class Point {
   x: number;
   y: number;
-  userData: number;
-  constructor(x: number, y: number, data: number) {
+  userData: any;
+  constructor(x: number, y: number, data: any) {
     this.x = x;
     this.y = y;
     this.userData = data;

@@ -2,7 +2,7 @@
   "compilerOptions": {
     "mapRoot": "./src/",
     "module": "none",
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "outFile": "build/main.js",
     "preserveConstEnums": true,
     "removeComments": true,
